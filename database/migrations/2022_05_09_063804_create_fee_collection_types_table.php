@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchesTable extends Migration
+class CreateFeeCollectionTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
+        Schema::create('fee_collection_types', function (Blueprint $table) {
             $table->id();
-            $table->string("branch_name",200);
+            $table->string("collection_head",150);
+            $table->text("description")->nullable();
+            $table->unsignedBigInteger("branch_id")->index('FK_BranchID_idx');
             $table->tinyInteger('is_active')->default(1);
+
+            $table->foreign('branch_id')->references('id')->on('branches');
         });
     }
 
@@ -27,6 +31,6 @@ class CreateBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branches');
+        Schema::dropIfExists('fee_collection_types');
     }
 }

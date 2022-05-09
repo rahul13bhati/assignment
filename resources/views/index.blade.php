@@ -1,5 +1,5 @@
-{{--ini_get('post_max_size')--}}
-{{--ini_get('upload_max_filesize')--}}
+{{--ini_get('post_max_size')
+ini_get('upload_max_filesize')--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -27,6 +27,7 @@
     <body >
         <div class="container">
             <form id="fileUploadForm" action="{{url('upload')}}" enctype="multipart/form-data" method="POST">
+                {{csrf_field()}}
                 <div class="form-horizontal">
                     <div class="form-group">
                         <div class="row">
